@@ -8,6 +8,7 @@ use App\Http\Controllers\RegistroMovilidadController;
 use App\Http\Controllers\RegistroEnfermoController;
 use App\Http\Controllers\RegistroConductaController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\PermisosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    
+    Route::get('/permisos', [PermisosController::class, 'index'])->name('permisos.index');
+
 });
 
 //Ruta para Nucleos

@@ -318,6 +318,12 @@ return [
             'label_color' => 'warning',
         ],
         [
+            'text'        => 'Permisos',
+            'url'         => '/permisos',
+            'icon'        => 'fas fa-door-open',
+            'label_color' => 'warning',
+        ],
+        [
             'text'        => 'Núcleos',
             'url'         => '/nucleos',
             'icon'        => 'fas fa-house-user',
@@ -357,6 +363,7 @@ return [
             'url'  => 'user/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
+        
         
         /*['header' => 'labels'],
         [
