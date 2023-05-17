@@ -10,6 +10,15 @@ use Yajra\DataTables\Datatables;
 
 class RegistroEnfermoController extends Controller
 { 
+
+    public function __construct()
+    {
+        $this->middleware('can:admin.enfermos.index')->only('index');
+        $this->middleware('can:admin.enfermos.create')->only('create', 'store');
+        $this->middleware('can:admin.enfermos.edit')->only('edit', 'update', 'show');
+        $this->middleware('can:admin.enfermos.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

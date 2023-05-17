@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Models\User;
+
 
 class UserSeeder extends Seeder
 {
@@ -15,34 +14,26 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $roleInvitado = Role::create(['name' => 'invitado']);
 
-        Permission::create(['name' => 'ver:role']);
-        Permission::create(['name' => 'crear:role']);
-        Permission::create(['name' => 'editar:role']);
-        Permission::create(['name' => 'eliminar:role']);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@mail.com',
+            'password' => bcrypt('12345678'),
+        ])->assignRole('Admin');
+
+        User::create([
+            'name' => 'Colaborador',
+            'email' => 'colaborador@mail.com',
+            'password' => bcrypt('12345678'),
+        ])->assignRole('Colaborador');
+
+        User::create([
+            'name' => 'Voluntario',
+            'email' => 'voluntario@mail.com',
+            'password' => bcrypt('12345678'),
+        ])->assignRole('Voluntario');
+
+        User::factory(17)->create();
         
-        Permission::create(['name' => 'ver:permiso']);
-
-        Permission::create(['name' => 'ver:usuario']);
-        Permission::create(['name' => 'crear:usuario']);
-        Permission::create(['name' => 'editar:usuario']);
-        Permission::create(['name' => 'eliminar:usuario']);
-
-        $user = new User;
-        $user->name = 'Admin';
-        $user->email = 'admin@mail.com';
-        $user->password = bcrypt('12345678');
-        $user->save();
-        $user->assignRole($roleAdmin);
-
-        $user = new User;
-        $user->name = 'Invitado';
-        $user->email = 'invitado@mail.com';
-        $user->password = bcrypt('12345678');
-        $user->save();
-        $user->assignRole($roleInvitado);
-
     }
 }

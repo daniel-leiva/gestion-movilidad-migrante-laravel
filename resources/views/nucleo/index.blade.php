@@ -8,10 +8,12 @@
 
 @section('content')
 
-    <a href="nucleo/create" class="btn btn-success fw-bold">
-        <i class="fas fa-plus-circle"></i>
-        Agregar Núcleo
-    </a>
+    @can('admin.nucleos.create')
+        <a href="nucleo/create" class="btn btn-success fw-bold">
+            <i class="fas fa-plus-circle"></i>
+            Agregar Núcleo
+        </a>
+    @endcan
     
     <div class="table-responsive mt-3">
         <!--TABLA CONTENIDO-->
@@ -121,9 +123,9 @@
                     {data: 'acciones', name: 'acciones', orderable: false, searchable: false, 
                         render: function (data, type, row) {
                         var buttons = '<div class="d-flex align-items-center">';
-                        buttons += '<a title="Ver Núcleo" href="/nucleo/' + row.id + '/show" class="btn btn-sm fw-bold mr-1 bg-warning"><i class="fas fa-eye ms-auto p-2"></i></a>';
-                        buttons += '<a title="Editar Núcleo" href="/nucleo/' + row.id + '/edit" class="btn btn-sm fw-bold mr-1 bg-primary"><i class="fas fa-edit ms-auto p-2"></i></a>';
-                        buttons += '<a title="Eliminar Núcleo" type="button" id="'+ row.id +'" class="delete-btn btn btn-sm fw-bold mr-1 bg-danger"><i class="fas fa-trash-alt ms-auto p-2"></i></a>';
+                        buttons += '@can('admin.nucleos.edit')<a title="Ver Núcleo" href="/nucleo/' + row.id + '/show" class="btn btn-sm fw-bold mr-1 bg-warning"><i class="fas fa-eye ms-auto p-2"></i></a>@endcan';
+                        buttons += '@can('admin.nucleos.edit')<a title="Editar Núcleo" href="/nucleo/' + row.id + '/edit" class="btn btn-sm fw-bold mr-1 bg-primary"><i class="fas fa-edit ms-auto p-2"></i></a>@endcan';
+                        buttons += '@can('admin.nucleos.destroy')<a title="Eliminar Núcleo" type="button" id="'+ row.id +'" class="delete-btn btn btn-sm fw-bold mr-1 bg-danger"><i class="fas fa-trash-alt ms-auto p-2"></i></a>@endcan';
                         buttons += '</div>';
     
                         return buttons;

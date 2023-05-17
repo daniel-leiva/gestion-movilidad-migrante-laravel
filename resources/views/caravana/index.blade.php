@@ -9,10 +9,12 @@
 @section('content')
 
     <!--Botón Agregar-->
+    @can('admin.caravanas.create')
     <a href="caravana/create" class="btn btn-success fw-bold">
         <i class="fas fa-plus-circle"></i>
         Agregar Caravana
     </a>
+    @endcan
     
     <!--Tabla Contenido-->
     <div class="table-responsive mt-3">
@@ -123,9 +125,9 @@
                     {data: 'acciones', name: 'acciones', orderable: false, searchable: false, 
                         render: function (data, type, row) {
                         var buttons = '<div class="d-flex align-items-center">';
-                        buttons += '<a title="Ver Caravana" href="/caravana/' + row.id + '/show" class="btn btn-sm fw-bold mr-1 bg-warning"><i class="fas fa-eye ms-auto p-2"></i></a>';
-                        buttons += '<a title="Editar Caravana" href="/caravana/' + row.id + '/edit" class="btn btn-sm fw-bold mr-1 bg-primary"><i class="fas fa-edit ms-auto p-2"></i></a>';
-                        buttons += '<a title="Eliminar Caravana" type="button" id="'+ row.id +'" class="delete-btn btn btn-sm fw-bold mr-1 bg-danger"><i class="fas fa-trash-alt ms-auto p-2"></i></a>';
+                        buttons += '@can('admin.caravanas.edit')<a title="Ver Caravana" href="/caravana/' + row.id + '/show" class="btn btn-sm fw-bold mr-1 bg-warning"><i class="fas fa-eye ms-auto p-2"></i></a>@endcan';
+                        buttons += '@can('admin.caravanas.edit')<a title="Editar Caravana" href="/caravana/' + row.id + '/edit" class="btn btn-sm fw-bold mr-1 bg-primary"><i class="fas fa-edit ms-auto p-2"></i></a>@endcan';
+                        buttons += '@can('admin.caravanas.create')<a title="Eliminar Caravana" type="button" id="'+ row.id +'" class="delete-btn btn btn-sm fw-bold mr-1 bg-danger"><i class="fas fa-trash-alt ms-auto p-2"></i></a>@endcan';
                         buttons += '</div>';
     
                         return buttons;

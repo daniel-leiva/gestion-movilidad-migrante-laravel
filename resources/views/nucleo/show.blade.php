@@ -30,12 +30,16 @@
                     <td> {{ $nucleo->estado }} </td>
                     <td>
                         <form action="{{ route ('nucleos.destroy', $nucleo->id) }}" method="POST">
-                            <a href="/nucleo/{{ $nucleo->id }}/edit" class="btn btn-primary fw-bold">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
+                            @can('admin.nucleos.edit')
+                                <a href="/nucleo/{{ $nucleo->id }}/edit" class="btn btn-primary fw-bold">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            @endcan
+                            @can('admin.nucleos.destroy')
+                                <a class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            @endcan
 
                             <!-- Modal Eliminar -->
                             <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

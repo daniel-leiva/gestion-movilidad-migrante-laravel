@@ -10,6 +10,15 @@ use Yajra\DataTables\Datatables;
 
 class RegistroConductaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:admin.conducta.index')->only('index');
+        $this->middleware('can:admin.conducta.create')->only('create', 'store');
+        $this->middleware('can:admin.conducta.edit')->only('edit', 'update', 'show');
+        $this->middleware('can:admin.conducta.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

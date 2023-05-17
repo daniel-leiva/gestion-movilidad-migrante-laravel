@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Auth;
 class RegistroMovilidadController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:admin.movilidad.index')->only('index', 'show');
+        $this->middleware('can:admin.movilidad.create')->only('create', 'store');
+        $this->middleware('can:admin.movilidad.edit')->only('edit', 'update');
+        $this->middleware('can:admin.movilidad.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

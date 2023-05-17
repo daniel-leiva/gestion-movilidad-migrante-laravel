@@ -9,10 +9,12 @@
 @section('content')
 
     <!--Botón Agregar-->
+    @can('admin.migrantes.create')
     <a href="migrante/create" class="btn btn-success fw-bold">
         <i class="fas fa-plus-circle"></i>
         Agregar Migrante
     </a>
+    @endcan
     
     <div class="table-responsive mt-3">
         <!--Tabla Contenido-->
@@ -148,9 +150,9 @@
                 {data: 'acciones', name: 'acciones', orderable: false, searchable: false, 
                     render: function (data, type, row) {
                     var buttons = '<div class="d-flex align-items-center">';
-                    buttons += '<a title="Ver Migrante" href="/migrante/' + row.id + '/show" class="btn btn-sm fw-bold mr-1 bg-warning"><i class="fas fa-eye ms-auto p-2"></i></a>';
-                    buttons += '<a title="Editar Migrante" href="/migrante/' + row.id + '/edit" class="btn btn-sm fw-bold mr-1 bg-primary"><i class="fas fa-edit ms-auto p-2"></i></a>';
-                    buttons += '<a title="Eliminar Migrante" type="button" id="'+ row.id +'" class="delete-btn btn btn-sm fw-bold mr-1 bg-danger"><i class="fas fa-trash-alt ms-auto p-2"></i></a>';
+                    buttons += '@can('admin.migrantes.edit')<a title="Ver Migrante" href="/migrante/' + row.id + '/show" class="btn btn-sm fw-bold mr-1 bg-warning"><i class="fas fa-eye ms-auto p-2"></i></a>@endcan';
+                    buttons += '@can('admin.migrantes.edit')<a title="Editar Migrante" href="/migrante/' + row.id + '/edit" class="btn btn-sm fw-bold mr-1 bg-primary"><i class="fas fa-edit ms-auto p-2"></i></a>@endcan';
+                    buttons += '@can('admin.migrantes.destroy')<a title="Eliminar Migrante" type="button" id="'+ row.id +'" class="delete-btn btn btn-sm fw-bold mr-1 bg-danger"><i class="fas fa-trash-alt ms-auto p-2"></i></a>@endcan';
                     buttons += '</div>';
 
                     return buttons;

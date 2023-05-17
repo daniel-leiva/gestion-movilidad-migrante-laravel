@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 
 class ChartController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -35,36 +36,9 @@ class ChartController extends Controller
         return view('inicio', compact('chart1'));
     }
 
-    public function migrantes()
-    {
-        $migrantes = Migrante::join('users', 'migrantes.usuario', 'users.id')
-        ->select(
-            'migrantes.id',
-            'migrantes.numero',
-            'migrantes.nombre_apellido',
-            'migrantes.npi',
-            'migrantes.fecha_nacimiento',
-            'migrantes.edad',
-            'migrantes.genero',
-            'migrantes.nacionalidad',
-            'migrantes.estado',
-            'migrantes.created_at',
-            'migrantes.updated_at',
-            'users.name as nombre_usuario'
-        )
-        ->orderBy('created_at', 'desc')
-        ->limit(10)
-        ->get();
-        return $migrantes;
-    }
-
     public function registros_movilidad()
     {
-        $registros_movilidad = RegistroMovilidad::join('users', 'registro_movilidads.usuario', 'users.id')
-        ->join('migrantes', 'registro_movilidads.migrante', 'migrantes.id')
-        ->join('nucleos', 'registro_movilidads.nucleo', 'nucleos.id')
-        ->join('caravanas', 'registro_movilidads.caravana', 'caravanas.id')
-        ->select(
+        $registros_movilidad = RegistroMovilidad::select(
             'registro_movilidads.id',
             'registro_movilidads.tipologia',
             'registro_movilidads.plan_movilidad',
@@ -75,14 +49,7 @@ class ChartController extends Controller
             'registro_movilidads.observaciones',
             'registro_movilidads.created_at',
             'registro_movilidads.updated_at',
-            'users.name as nombre_usuario',
-            'migrantes.npi as npi_migrante',
-            'migrantes.nombre_apellido as nombre_migrante',
-            'migrantes.edad as edad_migrante',
-            'migrantes.genero as genero_migrante',
-            'migrantes.nacionalidad as nacion_migrante',
-            'nucleos.nombre as nombre_nucleo',
-            'caravanas.codigo as codigo_caravana',
+            
         )
         ->orderBy('fecha_salida', 'asc')
         ->get();

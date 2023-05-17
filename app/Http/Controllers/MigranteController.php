@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Auth;
 class MigranteController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:admin.migrantes.index')->only('index', 'show');
+        $this->middleware('can:admin.migrantes.create')->only('create', 'store');
+        $this->middleware('can:admin.migrantes.edit')->only('edit', 'update');
+        $this->middleware('can:admin.migrantes.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -8,7 +8,7 @@ use App\Http\Controllers\RegistroMovilidadController;
 use App\Http\Controllers\RegistroEnfermoController;
 use App\Http\Controllers\RegistroConductaController;
 use App\Http\Controllers\ChartController;
-use App\Http\Controllers\PermisosController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +33,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
-    Route::get('/permisos', [PermisosController::class, 'index'])->name('permisos.index');
-
 });
+
+Route::resource('/users', UserController::class)->names('admin.users');
 
 //Ruta para Nucleos
 Route::middleware([
@@ -142,6 +141,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/inicio', [ChartController::class, 'index']);
-    Route::get('/api/migrantes', [ChartController::class, 'migrantes']);
-    Route::get('/api/registros_movilidad', [ChartController::class, 'registros_movilidad']);
+    Route::get('/api/migrantes', [ChartController::class, 'migrantes'])->middleware('can:admin.api.index');
+    Route::get('/api/registros_movilidad', [ChartController::class, 'registros_movilidad'])->middleware('can:admin.api.index');
 });

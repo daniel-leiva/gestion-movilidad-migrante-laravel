@@ -8,6 +8,15 @@ use Yajra\DataTables\Datatables;
 
 class NucleoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:admin.nucleos.index')->only('index', 'show');
+        $this->middleware('can:admin.nucleos.create')->only('create', 'store');
+        $this->middleware('can:admin.nucleos.edit')->only('edit', 'update');
+        $this->middleware('can:admin.nucleos.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

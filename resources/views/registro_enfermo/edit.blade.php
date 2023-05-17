@@ -33,10 +33,12 @@
             <i class="fas fa-times-circle"></i>
             Cancelar
         </a>
-        <button type="submit" href="" class="btn btn-primary fw-bold">
-            <i class="fas fa-edit"></i>
-            Editar
-        </button>
+        @can('admin.enfermos.edit')
+            <button type="submit" href="" class="btn btn-primary fw-bold">
+                <i class="fas fa-edit"></i>
+                Editar
+            </button>
+        @endcan
     </form>
 @stop
 

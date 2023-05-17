@@ -60,13 +60,16 @@
                     <td> {{ $registro_movilidad->updated_at }} </td>
                     <td>
                         <form action="{{ route ('registro_movilidads.destroy', $registro_movilidad->id) }}" method="POST">
-                            <a href="/registro_movilidad/{{ $registro_movilidad->id }}/edit" class="btn btn-primary fw-bold">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-
+                            @can('admin.movilidad.edit')
+                                <a href="/registro_movilidad/{{ $registro_movilidad->id }}/edit" class="btn btn-primary fw-bold">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            @endcan
+                            @can('admin.movilidad.destroy')
+                                <a class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            @endcan
                             <!-- Modal Eliminar -->
                             <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">

@@ -1,14 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Permisos')
+@section('title', 'Usuarios')
 
 @section('content_header')
-    <h1>Permisos</h1>
+    <h1>Usuarios</h1>
 @stop
 
 @section('content')
-HOLA
-
+    @livewire('admin.users-index')
 @stop
 
 @section('footer')
@@ -33,4 +32,6 @@ HOLA
 
     <!--Scripts SweetAlert-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 @stop

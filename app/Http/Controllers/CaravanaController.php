@@ -9,6 +9,15 @@ use Yajra\DataTables\Datatables;
 
 class CaravanaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:admin.caravanas.index')->only('index', 'show');
+        $this->middleware('can:admin.caravanas.create')->only('create', 'store');
+        $this->middleware('can:admin.caravanas.edit')->only('edit', 'update');
+        $this->middleware('can:admin.caravanas.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */

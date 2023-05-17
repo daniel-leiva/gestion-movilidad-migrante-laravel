@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('registro_movilidads', function (Blueprint $table) {
             $table->bigIncrements('id')->nullable(false);
             $table->unsignedBigInteger('migrante')->nullable(false);
-            $table->foreign('migrante')->references('id')->on('migrantes')->onDelete('cascade');
+            $table->foreign('migrante')->references('id')->on('migrantes');
             $table->string('tipologia')->nullable(false);
             $table->string('plan_movilidad')->nullable(false);
             $table->date('fecha_ingreso')->nullable(false);
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('bodega')->nullable(true);
             $table->longText('observaciones')->nullable(false);
             $table->unsignedBigInteger('caravana')->nullable(true);
-            $table->foreign('caravana')->references('id')->on('caravanas')->onDelete('cascade');
+            $table->foreign('caravana')->references('id')->on('caravanas');
             $table->unsignedBigInteger('nucleo')->nullable(true);
             $table->foreign('nucleo')->references('id')->on('nucleos');
             $table->unsignedBigInteger('usuario')->nullable(false);

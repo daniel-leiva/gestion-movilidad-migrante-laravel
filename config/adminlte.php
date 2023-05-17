@@ -307,33 +307,25 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text'        => 'Inicio',
             'url'         => '/inicio',
             'icon'        => 'fas fa-door-open',
             'label_color' => 'warning',
-        ],
-        [
-            'text'        => 'Permisos',
-            'url'         => '/permisos',
-            'icon'        => 'fas fa-door-open',
-            'label_color' => 'warning',
+            'can' => 'admin.ver.inicio',
         ],
         [
             'text'        => 'Núcleos',
             'url'         => '/nucleos',
             'icon'        => 'fas fa-house-user',
             'label_color' => 'warning',
+            'can' => 'admin.nucleos.index',
         ],
         [
             'text'        => 'Caravanas',
             'url'         => '/caravanas',
             'icon'        => 'fas fa-users',
             'label_color' => 'warning',
+            'can' => 'admin.caravanas.index'
         ],
         [
             'text'    => 'Migrantes',
@@ -342,18 +334,22 @@ return [
                 [
                     'text' => 'Registro Migrantes',
                     'url'  => '/migrantes',
+                    'can' => 'admin.migrantes.index',
                 ],
                 [
                     'text' => 'Registro Movilidad',
                     'url'  => '/registros_movilidad',
+                    'can' => 'admin.movilidad.index',
                 ],
                 [
                     'text' => 'Registro Enfermos',
                     'url'  => '/registro_enfermos',
+                    'can' => 'admin.enfermos.index',
                 ],
                 [
                     'text' => 'Registro Conducta',
                     'url'  => '/registros_conducta',
+                    'can' => 'admin.conducta.index',
                 ],
             ],
         ],
@@ -362,6 +358,13 @@ return [
             'text' => 'Perfil',
             'url'  => 'user/profile',
             'icon' => 'fas fa-fw fa-user',
+        ],
+        ['header' => 'Administración de Permisos'],
+        [
+            'text' => 'Usuarios',
+            'url'  => '/users',
+            'icon' => 'fas fa-user-shield',
+            'can' => 'admin.users.index',
         ],
         
         
@@ -535,5 +538,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

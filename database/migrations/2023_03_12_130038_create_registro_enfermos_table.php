@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('registro_enfermos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('migrante')->nullable(false);
-            $table->foreign('migrante')->references('id')->on('migrantes')->onDelete('cascade');
+            $table->foreign('migrante')->references('id')->on('migrantes');
             $table->longText('observaciones')->nullable(false);
             $table->unsignedBigInteger('usuario')->nullable(false);
-            $table->foreign('usuario')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('usuario')->references('id')->on('users');
             $table->timestamps();
         });
     }
