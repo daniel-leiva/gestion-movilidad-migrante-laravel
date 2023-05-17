@@ -45,6 +45,7 @@
             <select class="form-select" id="estado" name="estado" required>
                 <option class="bg-success fw-bold" value="Dentro" @if($migrante->estado == 'Dentro') selected  @endif >Dentro</option>
                 <option class="bg-danger fw-bold" value="Fuera" @if($migrante->estado == 'Fuera') selected  @endif>Fuera</option>
+                <option class="bg-info fw-bold" value="Desaparecido" @if($migrante->estado == 'Desaparecido') selected  @endif>Desaparecido</option>
             </select>
         </div>
         <div class="mb-3">

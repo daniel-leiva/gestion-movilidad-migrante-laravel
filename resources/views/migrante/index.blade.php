@@ -140,7 +140,7 @@
                 {data: 'nacionalidad', name: 'nacionalidad'},
                 {data: 'estado', name: 'estado',
                     createdCell: function(td, cellData, rowData, row, col){
-                        var color = (cellData === 'Dentro') ? '#198754' : '#DC3545';
+                        var color = (cellData === 'Dentro') ? '#198754' : (cellData === 'Desaparecido') ? '#000000' : '#ff0000';
                         $(td).css('background-color', color);
                     }
                 },
