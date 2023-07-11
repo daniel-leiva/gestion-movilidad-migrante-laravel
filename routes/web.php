@@ -9,6 +9,7 @@ use App\Http\Controllers\RegistroEnfermoController;
 use App\Http\Controllers\RegistroConductaController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\InicioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,7 @@ Route::middleware([
     Route::get('/migrante/{id}/destroy', [MigranteController::class, 'destroy'])->name('migrantes.destroy');
     Route::delete('/migrante/{id}/destroy', [MigranteController::class, 'destroy'])->name('migrantes.destroy');
     Route::get('/migrante/{id}/edit', [MigranteController::class, 'edit'])->name('migrantes.edit');
+    Route::get('/update_estado', [MigranteController::class, 'update_estado']);
 });
 
 //Ruta para Registro Movilidad
@@ -134,13 +136,11 @@ Route::middleware([
     Route::get('/registro_conducta/{id}/edit', [RegistroConductaController::class, 'edit'])->name('registros_conducta.edit');
 });
 
-//Ruta para Charts
+//Ruta para Inicio Charts
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/inicio', [ChartController::class, 'index']);
-    Route::get('/api/migrantes', [ChartController::class, 'migrantes'])->middleware('can:admin.api.index');
-    Route::get('/api/registros_movilidad', [ChartController::class, 'registros_movilidad'])->middleware('can:admin.api.index');
+    Route::get('/inicio', [InicioController::class, 'index'])->name('inicio.index');
 });

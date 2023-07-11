@@ -45,11 +45,11 @@
 
 
     <!-- Modal Eliminar -->
-    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminar" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar Eliminación</h1>
+            <h1 class="modal-title fs-5" id="modalEliminar">Confirmar Eliminación</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -68,6 +68,40 @@
         </div>
         </div>
     </div>
+
+    <!-- Modal Estado -->
+    <div class="modal fade" id="estadoModal" tabindex="-1" aria-labelledby="estadoModal" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="estadoModal">Editar Estado</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/migrante/store" method="POST" id="formEstado">
+            {{ csrf_field() }}
+                <div class="modal-body" id="infoEstado">
+                    <label for="" class="form-label"> Estado </label>
+                    <input type="hidden" id="valorID" name="valorID">
+                    <select class="form-select" id="estado" name="estado" required>
+                        <option class="bg-danger fw-bold" value="Fuera" selected>Fuera</option>
+                        <option class="bg-success fw-bold" value="Dentro">Dentro</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">
+                        <i class="fas fa-times-circle"></i>
+                        Cerrar
+                    </button>
+                    <button type="submit" name="option1" value="editarEstado" id="guardarEstado" class="btn btn-primary fw-bold">
+                        <i class="fas fa-save"></i>
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    
 
 @stop
 
@@ -122,7 +156,15 @@
                     table.ajax.reload();
                     }, 1000);
                 }
-            })
+            });
+        });
+
+        var migrante_id;
+        $(document).on('click', '.editar-estado', function(){
+            migrante_id = $(this).attr('id');
+            $('#estadoModal').modal('show');
+            console.log(migrante_id);
+            document.getElementById("valorID").value=migrante_id;
         });
 
         //Datatables
@@ -140,7 +182,7 @@
                 {data: 'nacionalidad', name: 'nacionalidad'},
                 {data: 'estado', name: 'estado',
                     createdCell: function(td, cellData, rowData, row, col){
-                        var color = (cellData === 'Dentro') ? '#198754' : (cellData === 'Desaparecido') ? '#000000' : '#ff0000';
+                        var color = (cellData === 'Dentro') ? '#198754' : '#DC3545';
                         $(td).css('background-color', color);
                     }
                 },
@@ -153,8 +195,8 @@
                     buttons += '@can('admin.migrantes.edit')<a title="Ver Migrante" href="/migrante/' + row.id + '/show" class="btn btn-sm fw-bold mr-1 bg-warning"><i class="fas fa-eye ms-auto p-2"></i></a>@endcan';
                     buttons += '@can('admin.migrantes.edit')<a title="Editar Migrante" href="/migrante/' + row.id + '/edit" class="btn btn-sm fw-bold mr-1 bg-primary"><i class="fas fa-edit ms-auto p-2"></i></a>@endcan';
                     buttons += '@can('admin.migrantes.destroy')<a title="Eliminar Migrante" type="button" id="'+ row.id +'" class="delete-btn btn btn-sm fw-bold mr-1 bg-danger"><i class="fas fa-trash-alt ms-auto p-2"></i></a>@endcan';
+                    buttons += '<a title="Editar Estado" type="button" id="'+ row.id +'" class="editar-estado btn btn-sm fw-bold mr-1 bg-info"><i class="fas fa-hiking ms-auto p-2"></i></a>';
                     buttons += '</div>';
-
                     return buttons;
                     }
                 },
@@ -249,7 +291,6 @@
                     },
                     targets: [0, 1, 4, 6, 7, 9, 11, 12]
                 },
-
             ],
             dom: '<"container-fluid"<"row"<"col"P>><"row"<"col"B><"col"l><"col"f>>>rt<"row"<"col"i><"col"p>>',
             buttons: [
@@ -303,7 +344,6 @@
                 }
             ]
         });
-
     });
     </script>
 

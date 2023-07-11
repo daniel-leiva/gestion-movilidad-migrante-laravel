@@ -9,6 +9,7 @@ use App\Models\Caravana;
 use App\Models\Nucleo;
 use Yajra\DataTables\Datatables;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RegistroMovilidadController extends Controller
 {
@@ -26,6 +27,7 @@ class RegistroMovilidadController extends Controller
      */
     public function index(Request $request)
     {
+        $registro = RegistroMovilidad::where('fecha_salida', '<', DB::raw('now()'))->get();
         if ($request->ajax()) {
             $data = RegistroMovilidad::join('users', 'registro_movilidads.usuario', 'users.id')
             ->join('migrantes', 'registro_movilidads.migrante', 'migrantes.id')
@@ -59,7 +61,6 @@ class RegistroMovilidadController extends Controller
                 ->rawColumns(['acciones'])
                 ->toJson();
         }
-        
         return view('registro_movilidad.index');
     }
 

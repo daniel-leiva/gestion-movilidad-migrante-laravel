@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class MigranteController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('can:admin.migrantes.index')->only('index', 'show');
@@ -18,6 +17,7 @@ class MigranteController extends Controller
         $this->middleware('can:admin.migrantes.edit')->only('edit', 'update');
         $this->middleware('can:admin.migrantes.destroy')->only('destroy');
     }
+
 
     /**
      * Display a listing of the resource.
@@ -29,7 +29,6 @@ class MigranteController extends Controller
 
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
             $data = Migrante::join('users', 'migrantes.usuario', 'users.id')
             ->select(
@@ -73,6 +72,13 @@ class MigranteController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->get("option1")=="editarEstado"){
+            $migrante = Migrante::findOrFail($request->get("valorID"));
+            $migrante->estado = $request->get('estado');
+            $migrante->save();
+            return redirect('/migrantes');
+        }
+
         $migrante = new Migrante();
         $migrante->numero = $request->get('numero');
         $migrante->nombre_apellido = $request->get('nombre_apellido');
