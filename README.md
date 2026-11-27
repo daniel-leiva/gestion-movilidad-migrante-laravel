@@ -29,8 +29,8 @@ Aplicación web desarrollada con **Laravel 10**, **Jetstream**, **Livewire** y *
 
 ## Contexto y estado del proyecto
 
-- **Contexto:** Proyecto de certificación de **INTECAP** desarrollado en 2023 que conserva su implementación original (no preparado para entornos de producción sin configuración previa de `.env`, `APP_KEY` y base de datos).
-- **Estado:** Finalizado (archivado para portafolio).
+- **Contexto:** Proyecto académico de certificación de **INTECAP** desarrollado en 2023 que conserva su implementación original con fines demostrativos. **No está preparado para entornos de producción.**
+- **Estado:** Finalizado (archivado para portafolio). La configuración sensible (`APP_KEY`, credenciales de base de datos) se gestiona mediante `.env` a partir de `.env.example`.
 
 ## Autor
 
